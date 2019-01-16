@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+
+        <div id="story-box"></div>
+        <div id="comment-box"></div>
+
+        <!-- Vendor -->
+        <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <!--<script type="text/babel" src="components.js"></script>-->
+
+
+        <!-- App -->
+        <script type="text/babel">
+          const now = new Date();
+          const topicsList = ['HTML', 'Javascript', 'React'];
+
+          class StoryBox extends React.Component {
+            render() {
+              return(
+                <div>
+                  <h1>Stories App</h1>
+                  <p className="date">
+                    Current time: {now.toTimeString()}
+                  </p>
+                  <ul>
+                    {topicsList.map( topic => <li>{topic}</li> )}
+                  </ul>
+                </div>
+              );
+            }
+          }
+
+          class CommentBox extends React.Component {
+            render() {
+              return(
+                <div className="comment-box">
+                  <h3 className="comment-header">Comments</h3>
+                  <h4 className="comment-count">2 comments</h4>
+                  <div className="comment-list">
+                  </div>
+                </div>
+              );
+            }
+          }
+
+          ReactDOM.render(
+            <StoryBox />, document.getElementById('story-box')
+          );
+
+          ReactDOM.render(
+            <CommentBox />, document.getElementById('comment-box')
+          );
+        </script>
+
+    </body>
+</html>
