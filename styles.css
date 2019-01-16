@@ -9,7 +9,7 @@ body {
 .comment-box {
     background-color: teal;
     color: white;
-    margin-top: 20px;
+    margin-top: 30px;
     padding: 10px 40px 20px 40px;
     width: 500px;
 }
@@ -21,4 +21,39 @@ body {
 
 .comment-count {
     opacity: 0.75;
+}
+
+.comment {
+    margin-top: 50px;
+    position: relative;
+}
+
+.comment-author {
+    border-bottom: solid 2px white;
+    font-weight: bold;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.comment-body {
+    font-size: 110%;
+}
+
+.comment-footer {
+    top: 0;
+    right: 0;
+    position: absolute;
+}
+
+a.comment-footer-delete,
+a.comment-footer-delete:visited,
+a.comment-footer-delete:focus,
+a.comment-footer-delete:active {
+    color: white;
+    font-size: 90%;
+    opacity: 0.75;
+}
+
+a.comment-footer-delete:hover {
+    opacity: 1;
 }
