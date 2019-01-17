@@ -1,42 +1,95 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 0;
 }
 
-.date {
-    color: darkgrey;
+h1, h2, h3, h4 {
+    font-weight: normal;
+}
+
+main {
+    max-width: 800px;
+    padding: 10px 15px;
+    position: relative;
+    width: 100%;
+}
+
+.blog-date {
+    color: #999;
+    font-size: 95%;
+}
+
+.blog-body {
+    color: #333;
+    line-height: 1.5;
+}
+
+.blog-footer {
+    margin-top: 25px;
+}
+
+.blog-tags-header {
+    margin-bottom: 10px;
+}
+
+.blog-tags {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.blog-tag {
+    display: block;
+    height: 30px;
+    padding: 0 10px;
+    margin: 0 10px 10px 0;
+    color: #fff;
+    font-size: 90%;
+    line-height: 30px;
+    background-color: red;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: opacity .2s ease-in-out;
+    white-space: nowrap;
+}
+
+.blog-tag:hover {
+    opacity: 0.75;
 }
 
 .comment-box {
-    background-color: teal;
-    color: white;
     margin-top: 30px;
-    padding: 10px 40px 20px 40px;
-    width: 500px;
+}
+
+.comment-top {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
 }
 
 .comment-header {
-    color: lightyellow;
-    text-transform: uppercase;
 }
 
 .comment-count {
+    font-size: 95%;
     opacity: 0.75;
 }
 
 .comment {
-    margin-top: 50px;
+    background-color: #f8f8f8;
+    margin-bottom: 20px;
+    padding: 30px;
     position: relative;
 }
 
 .comment-author {
-    border-bottom: solid 2px white;
+    border-bottom: solid 2px #eee;
     font-weight: bold;
-    padding-bottom: 10px;
-    text-transform: uppercase;
+    padding-bottom: 15px;
 }
 
 .comment-body {
-    font-size: 110%;
+    font-size: 95%;
+    line-height: 1.5;
 }
 
 .comment-footer {
@@ -49,11 +102,13 @@ a.comment-footer-delete,
 a.comment-footer-delete:visited,
 a.comment-footer-delete:focus,
 a.comment-footer-delete:active {
-    color: white;
-    font-size: 90%;
-    opacity: 0.75;
+    color: #777;
+    display: inline-block;
+    font-size: 150%;
+    padding: 6px 12px 4px;
+    text-decoration: none;
 }
 
 a.comment-footer-delete:hover {
-    opacity: 1;
+    color: red;
 }
