@@ -1,15 +1,13 @@
-const now = new Date();
-const tagList = ["Обзоры", "YOGA", "Возможности"];
 const blogPost = {
   id: 1,
   header: "Обзор YOGA 910",
-  date: "",
+  date: "2017-08-03T15:25:43.511Z",
   body:
-    "<p>Мы существенно упростили форму и уменьшили нагруженность ноутбука Lenovo Yoga 920 (13\") визуальными элементами, чтобы сделать его корпус еще тоньше. Полированный алюминиевый корпус выглядит одновременно и прочным, и элегантным. Доступно несколько вариантов цветового исполнения: медный, бронзовый и платиновый.</p><p>Уникальная поворотная конструкция по типу часового браслета позволяет в любой момент выбрать удобное положение экрана ноутбука Lenovo Yoga 920 (13\"). Шарнирное соединение отличается достаточным сопротивлением, чтобы надежно фиксировать экран в нужном положении.</p>",
+    '<p>Мы существенно упростили форму и уменьшили нагруженность ноутбука Lenovo Yoga 920 (13") визуальными элементами, чтобы сделать его корпус еще тоньше. Полированный алюминиевый корпус выглядит одновременно и прочным, и элегантным. Доступно несколько вариантов цветового исполнения: медный, бронзовый и платиновый.</p><p>Уникальная поворотная конструкция по типу часового браслета позволяет в любой момент выбрать удобное положение экрана ноутбука Lenovo Yoga 920 (13&quot;). Шарнирное соединение отличается достаточным сопротивлением, чтобы надежно фиксировать экран в нужном положении.</p>',
   tags: [
-    { id: 1, tag: "Обзоры", color: "#ffc800" },
-    { id: 2, tag: "YOGA", color: "#9b59b6" },
-    { id: 3, tag: "Возможности", color: "#828700" }
+    { id: 1, name: "Обзоры", color: "#ffc800" },
+    { id: 2, name: "YOGA", color: "#9b59b6" },
+    { id: 3, name: "Возможности", color: "#828700" }
   ]
 };
 const commentList = [
@@ -29,31 +27,39 @@ const commentList = [
 
 class BlogBox extends React.Component {
   render() {
+    const blogDate = new Date(blogPost.date);
+    const tags = this._getTags();
     return (
       <div className="blog">
         <h2 className="blog-header">{blogPost.header}</h2>
-        <p className="blog-date">{now.toDateString()}</p>
-        <div className="blog-body">{blogPost.body}</div>
+        <p className="blog-date">{blogDate.toDateString()}</p>
+        <div
+          className="blog-body"
+          dangerouslySetInnerHTML={{ __html: blogPost.body }}
+        />
         <div className="blog-footer">
-        <h3 className="blog-tags-header">В этой публикации</h3>
-          <div className="blog-tags">
-            {tagList.map(tag => (
-              <a href="#" className="blog-tag">
-                #{tag}
-              </a>
-            ))}
-          </div>
+          <h3 className="blog-tags-header">В этой публикации</h3>
+          <div className="blog-tags">{tags}</div>
         </div>
       </div>
     );
+  }
+
+  _getTags() {
+    return blogPost.tags.map(tag => {
+      return <BlogTag name={tag.name} color={tag.color} key={tag.id} />;
+    });
   }
 }
 
 class BlogTag extends React.Component {
   render() {
+    const tagStyle = {
+      backgroundColor: this.props.color
+    };
     return (
-      <a href="#" className="blog-tag">
-        {this.props.tag}
+      <a href="#" className="blog-tag" style={tagStyle}>
+        #{this.props.name}
       </a>
     );
   }
@@ -66,7 +72,9 @@ class CommentBox extends React.Component {
       <div className="comment-box">
         <div className="comment-top">
           <h2 className="comment-header">Комментарии</h2>
-          <p className="comment-count">2 комментария</p>
+          <p className="comment-count">
+            {this._getCommentsTitle(comments.length)}
+          </p>
         </div>
         <div className="comment-list">{comments}</div>
       </div>
@@ -79,6 +87,20 @@ class CommentBox extends React.Component {
         <Comment author={comment.author} body={comment.body} key={comment.id} />
       );
     });
+  }
+
+  _getCommentsTitle(commentQty) {
+    if (commentQty === 0) {
+      return "Нет комментариев";
+    } else if (commentQty > 10 && commentQty < 20) {
+      return `${commentQty} комментариев`;
+    } else if (commentQty % 10 === 1) {
+      return `${commentQty} комментарий`;
+    } else if (commentQty % 10 > 1 && commentQty % 10 < 5) {
+      return `${commentQty} комментария`;
+    } else {
+      return `${commentQty} комментариев`;
+    }
   }
 }
 
