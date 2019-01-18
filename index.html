@@ -90,11 +90,11 @@
 
           class CommentBox extends React.Component {
             constructor() {
-                super();
+              super();
 
-                this.state = {
-                    ShowComments: false
-                };
+              this.state = {
+                ShowComments: false
+              };
             }
 
             render() {
@@ -114,7 +114,14 @@
                     </p>
                   </div>
                   <div className="comment-control">
-                    <button className={this.state.ShowComments ? "comment-toggle __active" : "comment-toggle"} onClick={this._handleClick.bind(this)}>
+                    <button
+                      className={
+                        this.state.ShowComments
+                          ? "comment-toggle __active"
+                          : "comment-toggle"
+                      }
+                      onClick={this._handleClick.bind(this)}
+                    >
                       {buttonText}
                     </button>
                   </div>

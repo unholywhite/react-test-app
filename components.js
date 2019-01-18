@@ -66,8 +66,22 @@ class BlogTag extends React.Component {
 }
 
 class CommentBox extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      ShowComments: false
+    };
+  }
+
   render() {
     const comments = this._getComments();
+    let commentNodes;
+    let buttonText = "Показать комментарии";
+    if (this.state.ShowComments) {
+      commentNodes = <div className="comment-list">{comments}</div>;
+      buttonText = "Скрыть комментарии";
+    }
     return (
       <div className="comment-box">
         <div className="comment-top">
@@ -76,7 +90,19 @@ class CommentBox extends React.Component {
             {this._getCommentsTitle(comments.length)}
           </p>
         </div>
-        <div className="comment-list">{comments}</div>
+        <div className="comment-control">
+          <button
+            className={
+              this.state.ShowComments
+                ? "comment-toggle __active"
+                : "comment-toggle"
+            }
+            onClick={this._handleClick.bind(this)}
+          >
+            {buttonText}
+          </button>
+        </div>
+        {commentNodes}
       </div>
     );
   }
@@ -101,6 +127,12 @@ class CommentBox extends React.Component {
     } else {
       return `${commentQty} комментариев`;
     }
+  }
+
+  _handleClick() {
+    this.setState({
+      ShowComments: !this.state.ShowComments
+    });
   }
 }
 
