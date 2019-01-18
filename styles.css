@@ -66,6 +66,59 @@ main {
     justify-content: space-between;
 }
 
+.comment-control {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.comment-toggle {
+    background: none;
+    border: 0;
+    color: #0270c9;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 20px;
+    margin-top: -10px;
+    outline: none;
+    padding: 0;
+    padding-right: 12px;
+    position: relative;
+    text-decoration: none;
+    transition: .1s linear;
+    white-space: nowrap;
+}
+
+.comment-toggle::after {
+    border-bottom: 1px dashed #0270c9;
+    bottom: 0;
+    content: '';
+    display: block;
+    height: 1px;
+    left: 0;
+    position: absolute;
+    right: 12px;
+}
+
+.comment-toggle::before {
+    bottom: 5px;
+    content: '>';
+    display: block;
+    font-size: 14px;
+    line-height: 1;
+    position: absolute;
+    right: 0;
+    transition: .1s linear;
+}
+
+.comment-toggle.__active::before {
+    transform: rotate(90deg);
+}
+
+.comment-toggle:hover::after {
+    border-bottom: 1px solid #0270c9;
+}
+
 .comment-header {
 }
 

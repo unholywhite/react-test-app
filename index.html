@@ -113,9 +113,11 @@
                       {this._getCommentsTitle(comments.length)}
                     </p>
                   </div>
-                  <button onClick={this._handleClick.bind(this)}>
+                  <div className="comment-control">
+                    <button className={this.state.ShowComments ? "comment-toggle __active" : "comment-toggle"} onClick={this._handleClick.bind(this)}>
                       {buttonText}
-                  </button>
+                    </button>
+                  </div>
                   {commentNodes}
                 </div>
               );
@@ -145,7 +147,7 @@
 
             _handleClick() {
               this.setState({
-                showComments: !this.state.showComments
+                ShowComments: !this.state.ShowComments
               });
             }
           }
