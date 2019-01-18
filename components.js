@@ -78,9 +78,11 @@ class CommentBox extends React.Component {
     const comments = this._getComments();
     let commentNodes;
     let buttonText = "Показать комментарии";
+    let buttonClass = "comment-toggle";
     if (this.state.ShowComments) {
       commentNodes = <div className="comment-list">{comments}</div>;
       buttonText = "Скрыть комментарии";
+      buttonClass = "comment-toggle __active";
     }
     return (
       <div className="comment-box">
@@ -92,11 +94,7 @@ class CommentBox extends React.Component {
         </div>
         <div className="comment-control">
           <button
-            className={
-              this.state.ShowComments
-                ? "comment-toggle __active"
-                : "comment-toggle"
-            }
+            className={buttonClass}
             onClick={this._handleClick.bind(this)}
           >
             {buttonText}
