@@ -1,5 +1,5 @@
 body {
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
 }
 
@@ -164,4 +164,53 @@ a.comment-footer-delete:active {
 
 a.comment-footer-delete:hover {
     color: #f00;
+}
+
+.comment-form {
+    background-color: #f8f8f8;
+    padding: 10px 30px 30px;
+}
+
+.comment-form-author {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    height: 40px;
+    line-height: 38px;
+    margin-bottom: 20px;
+    outline: 0;
+    padding: 0 15px;
+    width: 50%;
+}
+
+.comment-form-body {
+    border: 1px solid #ccc;
+    font-family: Arial;
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 20px;
+    min-height: 42px;
+    outline: 0;
+    overflow: hidden;
+    padding: 8px 15px;
+    resize: none;
+    width: 100%;
+}
+
+.comment-form-submit {
+    background-color: #ffc600;
+    border: 0;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 16px;
+    height: 50px;
+    justify-content: center;
+    line-height: 1;
+    outline: 0;
+    padding: 0 30px;
+    transition: .2s ease-in-out;
+}
+
+.comment-form-submit:hover {
+    box-shadow: 0 5px 18px 2px rgba(255, 198, 0, 0.2);
 }
