@@ -33,20 +33,20 @@
               { id: 3, name: "Возможности", color: "#828700" }
             ]
           };
-          const commentList = [
-            {
-              id: 1,
-              author: "Сергей Мальцев",
-              body:
-                "Купил в прошлом году. Было много сомнений насчет процессора AMD, но все они развеялись при первом боевом крещении. Не виснет при выполнении нескольких задач, даже в Сони Вегасе при рендеринге, браузер работает как часы. ЮСБ работает заметно быстрее, только жаль, что разъема только два и все они с одной стороны."
-            },
-            {
-              id: 2,
-              author: "Анатолий Кардаш",
-              body:
-                "Первый раз пришел с нерабочей батареей, сервис оперативно отреагировал и предложил 2 варианта: вернуть деньги либо заменить на новый. Я выбрал новый, выслали такую же модель, но и та спустя неделю работы перестала видеть собственный жесткий диск. Настоятельно не рекомендую данный ноутбук."
-            }
-          ];
+          // const commentList = [
+          //   {
+          //     id: 1,
+          //     author: "Сергей Мальцев",
+          //     body:
+          //       "Купил в прошлом году. Было много сомнений насчет процессора AMD, но все они развеялись при первом боевом крещении. Не виснет при выполнении нескольких задач, даже в Сони Вегасе при рендеринге, браузер работает как часы. ЮСБ работает заметно быстрее, только жаль, что разъема только два и все они с одной стороны."
+          //   },
+          //   {
+          //     id: 2,
+          //     author: "Анатолий Кардаш",
+          //     body:
+          //       "Первый раз пришел с нерабочей батареей, сервис оперативно отреагировал и предложил 2 варианта: вернуть деньги либо заменить на новый. Я выбрал новый, выслали такую же модель, но и та спустя неделю работы перестала видеть собственный жесткий диск. Настоятельно не рекомендую данный ноутбук."
+          //   }
+          // ];
 
           class BlogBox extends React.Component {
             render() {
@@ -93,7 +93,21 @@
               super();
 
               this.state = {
-                ShowComments: false
+                ShowComments: false,
+                comments: [
+                  {
+                    id: 1,
+                    author: "Сергей Мальцев",
+                    body:
+                      "Купил в прошлом году. Было много сомнений насчет процессора AMD, но все они развеялись при первом боевом крещении. Не виснет при выполнении нескольких задач, даже в Сони Вегасе при рендеринге, браузер работает как часы. ЮСБ работает заметно быстрее, только жаль, что разъема только два и все они с одной стороны."
+                  },
+                  {
+                    id: 2,
+                    author: "Анатолий Кардаш",
+                    body:
+                      "Первый раз пришел с нерабочей батареей, сервис оперативно отреагировал и предложил 2 варианта: вернуть деньги либо заменить на новый. Я выбрал новый, выслали такую же модель, но и та спустя неделю работы перестала видеть собственный жесткий диск. Настоятельно не рекомендую данный ноутбук."
+                  }
+                ]
               };
             }
 
@@ -109,6 +123,7 @@
               }
               return (
                 <div className="comment-box">
+                  <CommentForm addComment={this._addComment.bind(this)} />
                   <div className="comment-top">
                     <h2 className="comment-header">Комментарии</h2>
                     <p className="comment-count">
@@ -129,11 +144,13 @@
             }
 
             _getComments() {
-              return commentList.map(comment => {
-                return (
-                  <Comment author={comment.author} body={comment.body} key={comment.id} />
-                );
-              });
+              // return commentList.map(comment => {
+                return this.state.comments.map((comment) => {
+                  return (
+                    <Comment author={comment.author} body={comment.body} key={comment.id} />
+                  );
+                });
+              // });
             }
 
             _getCommentsTitle(commentQty) {
@@ -154,6 +171,50 @@
               this.setState({
                 ShowComments: !this.state.ShowComments
               });
+            }
+
+            _addComment(author, body) {
+              const comment = {
+                id: this.state.comments.length + 1,
+                author,
+                body
+              };
+              this.setState({ comments: this.state.comments.concat([comment]) });
+            }
+          }
+
+          class CommentForm extends React.Component {
+            render() {
+              return (
+                <form className="comment-form" onSubmit={this._handlerSubmit.bind(this)}>
+                  <h2>Ваш комментарий</h2>
+                  <div className="comment-form-fields">
+                    <input
+                      placeholder="Ваше имя"
+                      className="comment-form-author"
+                      ref={(input) => this._author = input} />
+                    <textarea
+                      placeholder="Ваш комментарий"
+                      className="comment-form-body"
+                      ref={(textarea) => this._body = textarea} >
+                    </textarea>
+                  </div>
+                  <div className="comment-form-actions">
+                    <button type="submit" className="comment-form-submit">
+                      Отправить комментарий
+                    </button>
+                  </div>
+                </form>
+              );
+            }
+
+            _handlerSubmit(event) {
+              event.preventDefault();
+
+              let author = this._author;
+              let body = this._body;
+
+              this.props.addComment(author.value, body.value);
             }
           }
 
